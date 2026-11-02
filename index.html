@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#506f7c">
+  <meta name="description" content="Your Homixo 30-Day Clean Home Planner. Clean, organise, track and repeat.">
+  <title>Homixo | 30-Day Clean Home Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Homixo home"><span class="brand-mark">H</span><span>Homixo</span></a>
+    <span class="tagline">WHERE HOMES FEEL COMPLETE</span>
+    <button id="signOutBtn" class="text-button hidden" type="button">Sign out</button>
+  </header>
+
+  <main>
+    <section id="welcomeView" class="view welcome">
+      <div class="hero-copy">
+        <span class="eyebrow">A COMPLIMENTARY HOMIXO EXPERIENCE</span>
+        <h1>A cleaner home<br><em>starts with you.</em></h1>
+        <p>Build simple cleaning habits, one small task at a time. Unlock your interactive 30-day planner and keep your progress on this device.</p>
+        <div class="benefit-row">
+          <span>✓ 30 daily missions</span><span>✓ Cleaning tips</span><span>✓ Bag calculator</span>
+        </div>
+      </div>
+      <div class="unlock-card">
+        <div class="card-kicker">YOUR HOMIXO BENEFIT</div>
+        <h2>Unlock your journey</h2>
+        <p class="muted">Enter the details from your marketplace purchase.</p>
+        <form id="registerForm">
+          <label for="marketplace">Where did you purchase?</label>
+          <select id="marketplace" required>
+            <option value="">Select marketplace</option><option>Amazon</option><option>Flipkart</option><option>Other</option>
+          </select>
+          <label for="orderId">Marketplace Order ID</label>
+          <input id="orderId" name="orderId" autocomplete="off" placeholder="Enter your Order ID" required maxlength="80">
+          <label for="customerName">Your name</label>
+          <input id="customerName" name="customerName" autocomplete="name" placeholder="Enter your name" required maxlength="80">
+          <label for="phone">Mobile number</label>
+          <input id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" required maxlength="10">
+          <label class="consent"><input id="consent" type="checkbox" required> <span>I agree that Homixo may use these details to register and provide access to this planner. I have read the <a href="#privacy">privacy note</a>.</span></label>
+          <button class="primary full" type="submit">Unlock My Clean Home Journey <span>→</span></button>
+          <p id="registerMessage" class="form-message" role="status"></p>
+        </form>
+        <p class="tiny">Registration records the details you provide. It does not independently verify your marketplace purchase.</p>
+      </div>
+    </section>
+
+    <section id="dashboardView" class="view hidden">
+      <div class="dashboard-head">
+        <div><span class="eyebrow">YOUR PERSONAL CLEAN HOME SPACE</span><h1 id="greeting">Welcome back!</h1><p class="muted">Small steps. A fresher, more organised home.</p></div>
+        <div class="day-pill" id="dayPill">DAY 1 OF 30</div>
+      </div>
+      <div class="progress-card">
+        <div class="progress-top"><div><span class="muted small">YOUR JOURNEY</span><h2><span id="completedCount">0</span><small> / 30 days completed</small></h2></div><strong id="progressPercent">0%</strong></div>
+        <div class="progress-track"><span id="progressBar"></span></div>
+        <p class="muted small" id="progressCaption">Your first mission is waiting.</p>
+      </div>
+      <nav class="tabs" aria-label="Planner sections">
+        <button class="tab active" data-tab="challenges">Challenges</button>
+        <button class="tab" data-tab="tips">Cleaning tips</button>
+        <button class="tab" data-tab="calculator">Bag calculator</button>
+        <button class="tab" data-tab="stock">Stock tracker</button>
+        <button class="tab" data-tab="waste">Waste guide</button>
+      </nav>
+
+      <section id="challengesPanel" class="panel">
+        <div class="section-heading"><div><span class="eyebrow">30 DAYS TO A BETTER ROUTINE</span><h2>Your daily missions</h2></div><span class="muted small">Tick tasks as you go</span></div>
+        <div id="challengeList" class="challenge-grid"></div>
+      </section>
+      <section id="tipsPanel" class="panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">SIMPLE HABITS, REAL DIFFERENCE</span><h2>Cleaning tips & tricks</h2></div></div>
+        <div id="tipsList" class="tip-grid"></div>
+      </section>
+      <section id="calculatorPanel" class="panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">PLAN YOUR HOUSEHOLD SUPPLY</span><h2>Garbage bag calculator</h2></div></div>
+        <div class="tool-card">
+          <p class="muted">Estimate how long your 90-bag Homixo pack may last. Change the numbers to match your household.</p>
+          <div class="field-grid">
+            <div><label for="binCount">Number of bins</label><input id="binCount" type="number" min="1" max="30" value="2"></div>
+            <div><label for="changeEvery">Bags used per bin every (days)</label><input id="changeEvery" type="number" min="1" max="30" value="1"></div>
+            <div><label for="packSize">Bags in your pack</label><input id="packSize" type="number" min="1" max="1000" value="90"></div>
+          </div>
+          <div class="result-box"><span class="muted small">ESTIMATED PACK DURATION</span><strong id="durationResult">45 days</strong><span id="monthlyResult" class="muted small">About 60 bags per 30 days</span></div>
+          <p class="tiny">This is a planning estimate, not a recommendation to keep waste in a bin longer. Replace wet, soiled or odorous waste as needed and follow your local collection schedule.</p>
+        </div>
+      </section>
+      <section id="stockPanel" class="panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">KEEP AN EYE ON YOUR SUPPLY</span><h2>My bag stock tracker</h2></div></div>
+        <div class="tool-card">
+          <div class="stock-number"><span id="remainingBags">90</span><small>bags remaining</small></div>
+          <div class="progress-track"><span id="stockBar"></span></div>
+          <div class="field-grid">
+            <div><label for="startingStock">Starting stock</label><input id="startingStock" type="number" min="0" max="5000" value="90"></div>
+            <div><label for="usedStock">Bags used</label><input id="usedStock" type="number" min="0" max="5000" value="0"></div>
+          </div>
+          <div class="button-row"><button id="useOneBtn" class="secondary">＋ Record 1 bag used</button><button id="resetStockBtn" class="quiet">Reset tracker</button></div>
+          <p class="tiny">Your tracker is saved automatically on this browser.</p>
+        </div>
+      </section>
+      <section id="wastePanel" class="panel hidden">
+        <div class="section-heading"><div><span class="eyebrow">DISPOSE THOUGHTFULLY</span><h2>Waste management guide</h2></div></div>
+        <div class="guide-grid">
+          <article class="guide-card"><span class="guide-icon">🥬</span><h3>Wet waste</h3><p>Food scraps and other biodegradable kitchen waste. Keep it separate and follow your municipal collection guidance.</p></article>
+          <article class="guide-card"><span class="guide-icon">♻️</span><h3>Dry waste</h3><p>Keep clean paper, cardboard, metal, glass and accepted plastics separate for recycling where local facilities accept them.</p></article>
+          <article class="guide-card"><span class="guide-icon">⚠️</span><h3>Special waste</h3><p>Batteries, e-waste, medicines, sharps and hazardous items need appropriate authorised or municipal disposal routes. Do not mix them with ordinary household waste.</p></article>
+        </div>
+      </section>
+      <footer class="dashboard-footer"><span>Made with care by Homixo</span><a href="#privacy">Privacy note</a></footer>
+    </section>
+
+    <section id="privacy" class="privacy-note">
+      <h3>Privacy note</h3>
+      <p>Homixo uses the name, mobile number, marketplace and order reference you submit to create and support your planner registration. Do not enter payment details, passwords or OTPs. The planner stores progress in this browser. If registration is connected to Google Sheets, access to that sheet must remain restricted to authorised Homixo administrators. Add a Homixo contact email and a clear retention/deletion process before public launch.</p>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
